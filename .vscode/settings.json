@@ -1,0 +1,10 @@
+{
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.insertFinalNewline": true,
+  "jestrunner.jestCommand": "npm test --",
+  "prettier-eslint.eslintIntegration": true
+}
