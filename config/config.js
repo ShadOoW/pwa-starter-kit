@@ -21,13 +21,13 @@ nconf
     'FIREBASE_AUTH',
     'CANONICAL_ROOT',
     'FIREBASE_MSG_SENDER_ID',
-    'API_TOKENS'
+    'API_TOKENS',
   ])
   // 3. Config file
-  .file({file: path.join(__dirname, 'config.json')})
+  .file({ file: path.join(__dirname, 'config.json') })
   // 4. Defaults
   .defaults({
-    PORT: 8080 // Port used by HTTP server
+    PORT: 8080, // Port used by HTTP server
   });
 
 // Check for required settings
@@ -39,12 +39,18 @@ nconf
 function checkConfig(setting) {
   // If setting undefined, throw error
   if (!nconf.get(setting)) {
-    throw new Error(`You must set the ${setting} environment variable or add it to ` +
-      'config/config.json!');
+    throw new Error(
+      `You must set the ${setting} environment variable or add it to ` +
+        'config/config.json!',
+    );
   }
   // If setting includes a space, throw error
   if (nconf.get(setting).match(/\s/)) {
-    throw new Error(`The ${setting} environment variable is suspicious ("${nconf.get(setting)}")`);
+    throw new Error(
+      `The ${setting} environment variable is suspicious ("${nconf.get(
+        setting,
+      )}")`,
+    );
   }
 }
 

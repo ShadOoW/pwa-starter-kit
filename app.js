@@ -122,7 +122,7 @@ app.use((req, res) => {
 });
 
 // Basic error handler
-app.use((err, req, res, _) => {
+app.use((err, req, res) => {
   console.error(err);
   if (err.status === 404) {
     res

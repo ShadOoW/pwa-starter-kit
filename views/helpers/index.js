@@ -4,7 +4,7 @@ const DEFAULT_DARK = '#000000';
 
 const escapeHtml = require('escape-html');
 const moment = require('moment');
-const {bestContrastRatio} = require('../../lib/color');
+const { bestContrastRatio } = require('../../lib/color');
 const assetHashing = require('../../lib/asset-hashing').asset;
 
 function contrastColor(hexcolor) {
@@ -21,18 +21,23 @@ function contrastColor(hexcolor) {
 
 exports.contrastColor = contrastColor;
 
-exports.firstLetter = function(text) {
+exports.firstLetter = function (text) {
   return (text ? text[0] : '').toUpperCase();
 };
 
-exports.moment = function(date) {
+exports.moment = function (date) {
   return moment(date).fromNow();
 };
 
-exports.themeFragment = function(pwa) {
-  return 't=' + encodeURIComponent(pwa.displayName) +
-    '&bg=' + encodeURIComponent(pwa.backgroundColor) +
-    '&c=' + encodeURIComponent(contrastColor(pwa.backgroundColor));
+exports.themeFragment = function (pwa) {
+  return (
+    't=' +
+    encodeURIComponent(pwa.displayName) +
+    '&bg=' +
+    encodeURIComponent(pwa.backgroundColor) +
+    '&c=' +
+    encodeURIComponent(contrastColor(pwa.backgroundColor))
+  );
 };
 
 /*
@@ -40,11 +45,15 @@ exports.themeFragment = function(pwa) {
   highlighted JSON strings
 */
 function syntaxHighlight(json) {
-  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  json = json
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
   /* eslint-disable */
-  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-  /* eslint-enable */
-    match => {
+  return json.replace(
+    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+    /* eslint-enable */
+    (match) => {
       let cls = 'number';
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
@@ -58,56 +67,72 @@ function syntaxHighlight(json) {
         cls = 'null';
       }
       return '<span class="' + cls + '">' + match + '</span>';
-    });
+    },
+  );
 }
 
-exports.prettyJson = function(object) {
+exports.prettyJson = function (object) {
   return JSON.stringify(object, null, 4);
 };
 
-exports.highlightedJson = function(object) {
+exports.highlightedJson = function (object) {
   return syntaxHighlight(JSON.stringify(object, null, 2));
 };
 
-exports.getReportCategoryTableRow = function(reportCategory) {
-  return '<tr>' +
-    '<th scope="col">' + escapeHtml(reportCategory.name) + '</th>' +
-    '<th scope="col">' + Math.round(reportCategory.score) + '</th>' +
-    '</tr>';
+exports.getReportCategoryTableRow = function (reportCategory) {
+  return (
+    '<tr>' +
+    '<th scope="col">' +
+    escapeHtml(reportCategory.name) +
+    '</th>' +
+    '<th scope="col">' +
+    Math.round(reportCategory.score) +
+    '</th>' +
+    '</tr>'
+  );
 };
 
-exports.getAuditTableRow = function(audit) {
-  return '<tr>' +
-    '<td>' + escapeHtml(audit.result.description) + '</td>' +
-    '<td>' + audit.result.score + '</td>' +
-    '</tr>';
+exports.getAuditTableRow = function (audit) {
+  return (
+    '<tr>' +
+    '<td>' +
+    escapeHtml(audit.result.description) +
+    '</td>' +
+    '<td>' +
+    audit.result.score +
+    '</td>' +
+    '</tr>'
+  );
 };
 
-exports.truncate = function(str, len) {
+exports.truncate = function (str, len) {
   if (str.length > len && str.length > 0) {
     let newStr = str + ' ';
     newStr = str.substr(0, len);
     newStr = str.substr(0, newStr.lastIndexOf(' '));
-    newStr = (newStr.length > 0) ? newStr : str.substr(0, len);
+    newStr = newStr.length > 0 ? newStr : str.substr(0, len);
     return newStr + '...';
   }
   return str;
 };
 
-exports.equals = function(p1, p2) {
+exports.equals = function (p1, p2) {
   return p1 === p2;
 };
 
-exports.registerHelpers = function(hbs) {
+exports.registerHelpers = function (hbs) {
   hbs.registerHelper('firstLetter', exports.firstLetter);
   hbs.registerHelper('contrastColor', exports.contrastColor);
   hbs.registerHelper('themeFragment', exports.themeFragment);
   hbs.registerHelper('moment', exports.moment);
   hbs.registerHelper('prettyJson', exports.prettyJson);
   hbs.registerHelper('highlightedJson', exports.highlightedJson);
-  hbs.registerHelper('getReportCategoryTableRow', exports.getReportCategoryTableRow);
+  hbs.registerHelper(
+    'getReportCategoryTableRow',
+    exports.getReportCategoryTableRow,
+  );
   hbs.registerHelper('getAuditTableRow', exports.getAuditTableRow);
-  hbs.registerHelper('asset', assetPath => assetHashing.encode(assetPath));
+  hbs.registerHelper('asset', (assetPath) => assetHashing.encode(assetPath));
   hbs.registerHelper('truncate', exports.truncate);
   hbs.registerHelper('equals', exports.equals);
 };
