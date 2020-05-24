@@ -2,6 +2,7 @@ node_modules
 
 # Auto generated
 public/sw.js
+public/sw.js.map
 public/js/main.js
 public/js/main.js.map
 

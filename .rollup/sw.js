@@ -1,11 +1,13 @@
 import babel from 'rollup-plugin-babel';
+import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonsjs from 'rollup-plugin-commonjs';
 
 export default {
-  input: './public/js/main.es6.js',
+  input: './sw.js',
   plugins: [
+    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     babel({
       exclude: 'node_modules/**',
     }),
@@ -17,7 +19,7 @@ export default {
   context: 'window',
   output: [
     {
-      file: './public/js/main.js',
+      file: './public/sw.js',
       // Fixes 'navigator' not defined when using Firebase and strict mode:
       // http://stackoverflow.com/questions/31221357/webpack-firebase-disable-parsing-of-firebase
       strict: false,

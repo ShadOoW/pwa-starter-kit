@@ -27,7 +27,7 @@ nconf
   .file({ file: path.join(__dirname, 'config.json') })
   // 4. Defaults
   .defaults({
-    PORT: 8080, // Port used by HTTP server
+    PORT: 8081, // Port used by HTTP server
   });
 
 // Check for required settings

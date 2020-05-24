@@ -1,20 +1,12 @@
-/* eslint-env serviceworker, browser */
-
-// sw-offline-google-analytics *must* be imported and initialized before
-// sw-toolbox, because its 'fetch' event handler needs to run first.
-// importScripts(
-//   '/sw-offline-google-analytics/offline-google-analytics-import.js',
-// );
-// goog.offlineGoogleAnalytics.initialize();
-
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js',
-);
-
 importScripts('/js/sw-assets-precache.js');
 
-const { setCacheNameDetails } = workbox.core;
+import { setCacheNameDetails } from 'workbox-core';
+import { precacheAndRoute } from 'workbox-precaching';
+import * as navigationPreload from 'workbox-navigation-preload';
+import { NetworkOnly } from 'workbox-strategies';
+import { registerRoute, NavigationRoute } from 'workbox-routing';
 
+// ### Configure Cache
 const PREFIX = 'hdi.ma';
 const VERSION = 'v1';
 
@@ -23,37 +15,63 @@ setCacheNameDetails({
   suffix: VERSION,
 });
 
-const OFFLINE_URL = '/.app/offline';
+// ### Precache
 const SHELL_URL = '/.app/shell';
-
-const OFFLINE = [{ url: OFFLINE_URL }, { url: SHELL_URL }].concat(
-  self.__WB_MANIFEST,
+const SHELL_NAME = 'shell-html';
+precacheAndRoute(
+  // eslint-disable-next-line no-undef
+  ASSETS.concat(self.__WB_MANIFEST, [
+    { url: SHELL_URL, revision: `${SHELL_NAME}-${VERSION}` },
+  ]),
 );
 
-const { precacheAndRoute } = workbox.precaching;
+// ### Offline
+const OFFLINE_URL = '/.app/offline';
+const OFFLINE_NAME = 'offline-html';
 
-precacheAndRoute(OFFLINE.concat(ASSETS));
+self.addEventListener('install', async (event) => {
+  event.waitUntil(
+    caches.open(OFFLINE_NAME).then((cache) => cache.add(OFFLINE_URL)),
+  );
+});
+
+navigationPreload.enable();
+
+const networkOnly = new NetworkOnly();
+const navigationHandler = async (params) => {
+  try {
+    // Attempt a network request.
+    return await networkOnly.handle(params);
+  } catch (error) {
+    // If it fails, return the cached HTML.
+    return caches.match(OFFLINE_URL, {
+      cacheName: OFFLINE_NAME,
+    });
+  }
+};
+
+registerRoute(new NavigationRoute(navigationHandler));
 
 // // Use sw-toolbox
 // importScripts('/sw-toolbox/sw-toolbox.js'); /* global toolbox */
 // toolbox.options.debug = false;
 
-const CACHE_NAME = `${PREFIX}-v${VERSION}`;
-const PWA_OPTION = {
-  cache: {
-    name: `PWA-${CACHE_NAME}`,
-    maxAgeSeconds: 60 * 60 * 12,
-    queryOptions: {
-      ignoreSearch: true,
-    },
-  },
-};
-const PWA_LIST_OPTION = {
-  cache: {
-    name: `LIST-${CACHE_NAME}`,
-    maxAgeSeconds: 60 * 60 * 6,
-  },
-};
+// const CACHE_NAME = `${PREFIX}-v${VERSION}`;
+// const PWA_OPTION = {
+//   cache: {
+//     name: `PWA-${CACHE_NAME}`,
+//     maxAgeSeconds: 60 * 60 * 12,
+//     queryOptions: {
+//       ignoreSearch: true,
+//     },
+//   },
+// };
+// const PWA_LIST_OPTION = {
+//   cache: {
+//     name: `LIST-${CACHE_NAME}`,
+//     maxAgeSeconds: 60 * 60 * 6,
+//   },
+// };
 
 // toolbox.precache(OFFLINE.concat(ASSETS));
 // toolbox.options.cache.name = CACHE_NAME;
