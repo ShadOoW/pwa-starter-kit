@@ -3,28 +3,54 @@ import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonsjs from 'rollup-plugin-commonjs';
+import del from 'rollup-plugin-delete';
 
-export default {
-  input: './sw.js',
-  plugins: [
-    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+const input = './sw.js';
+const output = './public/sw.js';
+const outputMap = './public/sw.js.map';
+
+export default (CLIArgs) => {
+  const env = CLIArgs['config-env'] || 'dev';
+
+  const bundle = {
+    input: input,
+    output: [
+      {
+        file: output,
+        format: 'iife',
+        sourcemap: true,
+      },
+    ],
+    watch: {
+      include: [input],
+    },
+  };
+  bundle.plugins = getPluginsConfig(env);
+  return bundle;
+};
+
+const getPluginsConfig = (env) => {
+  const sortie = [
+    del({
+      targets: [output, outputMap],
+      verbose: true,
+      runOnce: true,
+    }),
+    nodeResolve(),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(
+        env === 'prod' ? 'production' : 'development',
+      ),
+    }),
+    commonsjs(),
     babel({
       exclude: 'node_modules/**',
     }),
-    terser(),
-    nodeResolve(),
-    commonsjs(),
-  ],
-  // Quiet warning: https://github.com/rollup/rollup/wiki/Troubleshooting#this-is-undefined
-  context: 'window',
-  output: [
-    {
-      file: './public/sw.js',
-      // Fixes 'navigator' not defined when using Firebase and strict mode:
-      // http://stackoverflow.com/questions/31221357/webpack-firebase-disable-parsing-of-firebase
-      strict: false,
-      format: 'iife',
-      sourcemap: true,
-    },
-  ],
+  ];
+
+  if (env === 'prod') {
+    sortie.push(terser());
+  }
+
+  return sortie;
 };
