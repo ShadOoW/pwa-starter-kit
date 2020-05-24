@@ -1,12 +1,13 @@
+/* eslint-env serviceworker, browser */
 importScripts('/js/sw-assets-precache.js');
 
 import { setCacheNameDetails } from 'workbox-core';
 import { precacheAndRoute } from 'workbox-precaching';
 import * as navigationPreload from 'workbox-navigation-preload';
-import { NetworkOnly } from 'workbox-strategies';
+import { NetworkFirst } from 'workbox-strategies';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
 
-// ### Configure Cache
+// ### Configure Cache Name
 const PREFIX = 'hdi.ma';
 const VERSION = 'v1';
 
@@ -15,9 +16,12 @@ setCacheNameDetails({
   suffix: VERSION,
 });
 
+const getCacheName = (name) => `${PREFIX}-${name}-${VERSION}`;
+
 // ### Precache
 const SHELL_URL = '/.app/shell';
-const SHELL_NAME = 'shell-html';
+const SHELL_NAME = getCacheName('shell-html');
+
 precacheAndRoute(
   // eslint-disable-next-line no-undef
   ASSETS.concat(self.__WB_MANIFEST, [
@@ -27,7 +31,7 @@ precacheAndRoute(
 
 // ### Offline
 const OFFLINE_URL = '/.app/offline';
-const OFFLINE_NAME = 'offline-html';
+const OFFLINE_NAME = getCacheName('offline-html');
 
 self.addEventListener('install', async (event) => {
   event.waitUntil(
@@ -37,11 +41,10 @@ self.addEventListener('install', async (event) => {
 
 navigationPreload.enable();
 
-const networkOnly = new NetworkOnly();
 const navigationHandler = async (params) => {
   try {
     // Attempt a network request.
-    return await networkOnly.handle(params);
+    return await new NetworkFirst().handle(params);
   } catch (error) {
     // If it fails, return the cached HTML.
     return caches.match(OFFLINE_URL, {
@@ -94,15 +97,15 @@ registerRoute(new NavigationRoute(navigationHandler));
 // const hdiHandler = (request, values, options) => {
 //   return toolbox.fastest(request, values, options).catch((_) => {
 //     // networkFirst failed (no network and not in cache)
-//     getFromCache(OFFLINE_URL).then((response) => {
-//       return (
-//         response ||
-//         new Response('', {
-//           status: 500,
-//           statusText: 'Offline Page Missing',
-//         })
-//       );
-//     });
+// getFromCache(OFFLINE_URL).then((response) => {
+//   return (
+//     response ||
+//     new Response('', {
+//       status: 500,
+//       statusText: 'Offline Page Missing',
+//     })
+//   );
+// });
 //   });
 // };
 
