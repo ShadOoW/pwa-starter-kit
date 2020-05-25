@@ -5,6 +5,8 @@ public/sw.js
 public/sw.js.map
 public/js/main.js
 public/js/main.js.map
+public/css/styles.css
+public/css/styles.min.css
 
 # Temp
 notes.txt
