@@ -1,52 +1,23 @@
-<!-- Start of header include. -->
-<div class="navbar dark-primary-background">
-  <div class="navbar-title"><a id="title" class="gulliver-content-only offline-aware" href="/">PWA Directory</a></div>
-  <div class="navbar-subtitle hide-on-mobile">
-    <a id="subtitle" href="/" class="gulliver-content-only offline-aware">A Directory of Progressive Web Apps</a>
-  </div>
-
-  <div class="notifications">
-    <input type="checkbox" id="notifications" class="switch hidden" />
-    {{!-- {{> notifications_active }} --}}
-    {{!-- {{> notifications_off }} --}}
-    <label for="notifications" class="switch-label box-shadow"></label>
-  </div>
-</div>
-
-<div class="section dark-primary-background box-shadow">
-  {{!-- <a id="backlink" class="back{{#unless backlink}} hidden{{/unless}}">{{> chevron_left }}</a> --}}
-  <div class="section-top">
-    <form id="search" class="search-form">
-      <div class="search-group">
-        <input id="search-input" type="text" name="search" class="form-input box-shadow" value="{{searchQuery}}"
-          placeholder="Search for PWAs" aria-label="Seach for PWAs">
-        {{!-- <a id="search-icon">{{> icon_search }}</a> --}}
-      </div>
-    </form>
-    <button id="share-button" class="toolbar-button button blue offline-aware hidden" aria-label="Share">
-      {{!-- <span class="toolbar-icon">{{> icon_share}}</span> --}}
-    </button>
-    <button id="signin-button" class="toolbar-button button blue offline-aware" aria-label="Sign In">
-      {{!-- <span class="auth-button-label-login toolbar-icon">{{> icon_log_in}}</span> --}}
-    </button>
-    <button id="signout-button" class="toolbar-button button blue offline-aware hidden" aria-label="Sign Out">
-      {{!-- <span class="auth-button-label-logout toolbar-icon">{{> icon_log_out}}</span> --}}
-    </button>
-  </div>
-  <div id="tabs" class="section-tabs{{#unless mainPage}} hidden{{/unless}}">
-    <a id="installable"
-      class="tab{{#if (equals currentTab 'installable')}} activetab{{/if}} gulliver-content-only offline-aware"
-      href="/">
-      Installable
+<footer class="dark-primary-background">
+  <div class="offline-status">Offline</div>
+  <ul>
+    <li>
+      <a href="https://github.com/GoogleChrome/gulliver" target="_blank" rel="noopener">
+        <img id="github-logo" class="github-logo"
+          srcset="/images/GitHub-Mark-Light-24px.png 1x, /images/GitHub-Mark-Light-48px.png 2x" width="24" height="24"
+          alt="Github" attribution="github">
+      </a>
+    </li>
+    <li><a href="https://github.com/GoogleChrome/gulliver/issues/new">feedback</a></li>
+    <li><a href="/about">about</a></li>
+    <li><a href="https://www.google.com/intl/en/policies/privacy/">privacy</a></li>
+    <li>
+      <a href="http://feeds.feedburner.com/PwaDirectory" target="_blank" rel="noopener">
+        <img id="rss-logo" class="rss-logo" srcset="/images/feed-icon-24px.png 1x, /images/feed-icon-48px.png 2x"
+          width="24" height="24" alt="RSS">
+      </a>
+    </li>
     </a>
-    <a id="newest" class="tab{{#if (equals currentTab 'newest')}} activetab{{/if}} gulliver-content-only offline-aware"
-      href="/pwas/newest">
-      New
-    </a>
-    <a id="score" class="tab{{#if (equals currentTab 'score')}} activetab{{/if}} gulliver-content-only offline-aware"
-      href="/pwas/score">
-      Score
-    </a>
-  </div>
-</div>
-<!-- End of header include. -->
+  </ul>
+</footer>
+<script async src="https://www.google-analytics.com/analytics.js"></script>

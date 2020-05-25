@@ -66,8 +66,8 @@ function setupListViewArguments(req, viewState, result) {
   return Object.assign(libMetadata.fromRequest(req), {
     title: 'PWA Directory',
     description: 'PWA Directory: A Directory of Progressive Web Apps',
-    pwas: result.pwas,
-    hasNextPage: result.hasMore,
+    // pwas: result.pwas,
+    // hasNextPage: result.hasMore,
     hasPreviousPage: viewState.pageNumber > 1,
     nextPageNumber: viewState.pageNumber + 1,
     previousPageNumber:
@@ -86,9 +86,13 @@ function setupListViewArguments(req, viewState, result) {
 }
 
 async function listPwas(req, res, next, sortOrder, filters) {
-  // const viewState = setupListViewState(req);
+  const viewState = setupListViewState(req);
   console.log('hello from about');
-  const html = await render(res, 'about/view.hbs', {});
+  const html = await render(
+    res,
+    'about/view.hbs',
+    setupListViewArguments(req, viewState, {}),
+  );
   res.send(html);
   // pwaLib
   //   .list(viewState.start, viewState.limit, sortOrder, filters)

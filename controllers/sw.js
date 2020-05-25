@@ -7,6 +7,7 @@ const asset = require('../lib/asset-hashing').asset;
 const ASSETS = JSON.stringify(
   ['/css/style.css', '/js/main.js'].map((assetPath) => ({
     url: asset.encode(assetPath),
+    revision: null,
   })),
 );
 
