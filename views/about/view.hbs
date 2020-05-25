@@ -1,3 +1,4 @@
+{{#unless contentOnly}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,13 @@
   {{> head}}
 </head>
 
-<body data-empty-shell>
+<body>
   {{> header}}
   <div class="page-holder">
     <main class="page">
-      <!-- Content loaded from the shell goes here -->
-      SHELL PAGE
+      {{/unless}}
+      <div class="section-title">Hello from about</div>
+      {{#unless contentOnly}}
     </main>
     <div class='page-loader'>
     </div>
@@ -19,3 +21,4 @@
 </body>
 
 </html>
+{{/unless}}

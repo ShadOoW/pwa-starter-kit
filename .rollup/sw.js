@@ -5,7 +5,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonsjs from 'rollup-plugin-commonjs';
 import del from 'rollup-plugin-delete';
 
-const input = './sw.js';
+const input = './public/sw.es6.js';
 const output = './public/sw.js';
 const outputMap = './public/sw.js.map';
 

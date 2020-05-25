@@ -3,6 +3,8 @@ module.exports = {
   globPatterns: [
     './images/**',
     './manifest.json',
+    './favicons/android-chrome-16x16.png',
+    './favicons/android-chrome-32x32.png',
     './favicons/android-chrome-72x72.png',
   ],
   globIgnores: ['favicons/*'],

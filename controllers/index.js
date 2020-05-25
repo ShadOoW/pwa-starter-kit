@@ -12,6 +12,9 @@ router.use(bodyParser.json());
 // Tasks
 // router.use('/tasks', require('./tasks'));
 
+// About
+router.use('/about', require('./about'));
+
 // Videos
 router.use('/videos', require('./videos'));
 
