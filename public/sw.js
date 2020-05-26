@@ -33,8 +33,8 @@ const SHELL_URL = '/.app/shell';
 const OFFLINE = [
   OFFLINE_URL,
   SHELL_URL,
-  '/?cacheOnly=true',
-  '/favicons/android-chrome-72x72.png',
+  '/?contentOnly=true',
+  '/favicons/android-chrome-192x192.png',
   'images/github-24px.png',
   'images/github-48px.png',
   'images/rick-morty-logo.png',
