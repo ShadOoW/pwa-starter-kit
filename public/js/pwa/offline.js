@@ -4,15 +4,15 @@ export default class Offline {
   constructor(window, router) {
     this.window = window;
     this.router = router;
-    this.setupEventhandlers();
+    this._setupEventhandlers();
   }
 
   /**
-   * All elements with class .gulliver-online-aware will:
+   * All elements with class .offline-aware will:
    * have an 'online' dataset property that reflects the current online state.
    * receive a 'change' event whenever the state changes.
    */
-  setupEventhandlers() {
+  _setupEventhandlers() {
     const body = this.window.document.querySelector('body');
     this.window.addEventListener('online', () => {
       body.removeAttribute('offline');

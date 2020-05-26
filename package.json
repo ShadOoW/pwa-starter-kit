@@ -8,8 +8,6 @@
     "monitor": "nodemon app.js",
     "deploy": "npm run prestart && gcloud app deploy app.yaml",
     "build:js": "BABEL_ENV=default rollup -c .rollup/main.js",
-    "build:sw:dev": "BABEL_ENV=sw rollup -c .rollup/sw.js --config-env=dev && node ./.workbox/inject.js",
-    "build:sw:prod": "BABEL_ENV=sw rollup -c .rollup/sw.js --config-env=prod && node ./.workbox/inject.js",
     "prebuild:css": "sass public/css/main.scss public/css/styles.css",
     "build:css": "postcss public/css/styles.css -o public/css/styles.min.css",
     "mocha-app": "_mocha test/app/**/* --exit",
@@ -41,11 +39,6 @@
     "sw-toolbox": "^3.6.0",
     "url-polyfill": "^1.1.9",
     "whatwg-fetch": "^3.0.0",
-    "workbox-core": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
     "yaku": "^1.0.1"
   },
   "devDependencies": {
@@ -68,8 +61,7 @@
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^6.1.0",
-    "sass": "^1.26.5",
-    "workbox-build": "^5.1.3"
+    "sass": "^1.26.5"
   },
   "postcss": {
     "plugins": {

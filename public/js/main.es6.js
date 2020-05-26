@@ -24,7 +24,7 @@ class Main {
 
     this.setupRoutes();
     // this.setupBacklink();
-    // this.setupServiceWorker();
+    this.setupServiceWorker();
     // this.setupMessaging();
   }
 
@@ -157,4 +157,4 @@ class Main {
   }
 }
 
-window.mainHDI = new Main();
+window.__MAIN__ = new Main();
