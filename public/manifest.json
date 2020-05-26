@@ -1,6 +1,6 @@
 {
-  "name": "PWA Directory",
-  "short_name": "PwaDirectory",
+  "name": "Rick and Morty",
+  "short_name": "Rick and Morty",
   "description": "A Directory of PWAs",
   "start_url": "/?utm_source=homescreen",
   "icons": [
@@ -15,14 +15,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#7cc0ff",
-  "background_color": "#7cc0ff",
+  "theme_color": "#02c39a",
+  "background_color": "#02c39a",
   "display": "standalone",
-  "scope": "/",
-  "share_target": {
-    "url_template": "/pwas/add?url={url}"
-  },
-  "//": "Some browsers will use this to enable push notifications.",
-  "//": "It is the same for all projects, this is not your project's sender ID",
-  "gcm_sender_id": "103953800507"
+  "scope": "/"
 }
