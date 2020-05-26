@@ -1,0 +1,22 @@
+@use '../variables/breakpoints';
+
+@mixin small-only {
+  @media (max-width: breakpoints.$small) {
+    @content;
+  }
+}
+@mixin small-up {
+  @media (min-width: breakpoints.$small) {
+    @content;
+  }
+}
+@mixin medium-up {
+  @media (min-width: breakpoints.$medium) {
+    @content;
+  }
+}
+@mixin large-up {
+  @media (min-width: breakpoints.$large) {
+    @content;
+  }
+}

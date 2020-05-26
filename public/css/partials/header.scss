@@ -1,0 +1,34 @@
+#app-header {
+  .logo {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      max-width: 185px;
+    }
+  }
+
+  nav {
+    height: 4rem;
+    justify-content: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      color: var(--color-foregroundAccent);
+      text-decoration: none;
+
+      &.active {
+        border-bottom: 2px solid var(--color-foregroundAccent);
+      }
+
+      h2 {
+        padding: 0 1.5rem;
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@
     "build:js": "BABEL_ENV=default rollup -c .rollup/main.js",
     "build:sw:dev": "BABEL_ENV=sw rollup -c .rollup/sw.js --config-env=dev && node ./.workbox/inject.js",
     "build:sw:prod": "BABEL_ENV=sw rollup -c .rollup/sw.js --config-env=prod && node ./.workbox/inject.js",
-    "prebuild:css": "node-sass public/css/main.scss public/css/styles.css",
+    "prebuild:css": "sass public/css/main.scss public/css/styles.css",
     "build:css": "postcss public/css/styles.css -o public/css/styles.min.css",
     "mocha-app": "_mocha test/app/**/* --exit",
     "mocha-client": "BABEL_ENV=test _mocha --compilers js:babel-core/register test/client/**/*.js",
@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "escape-html": "^1.0.3",
@@ -59,7 +60,6 @@
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
-    "node-sass": "^4.14.1",
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
     "rollup": "^2.10.7",
@@ -68,6 +68,7 @@
     "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^6.0.1",
+    "sass": "^1.26.5",
     "workbox-build": "^5.1.3"
   },
   "postcss": {

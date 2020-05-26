@@ -1,6 +1,6 @@
 {{#unless contentOnly}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
   {{> head}}
@@ -8,10 +8,14 @@
 
 <body>
   {{> header}}
-  <div class="page-holder">
-    <main class="page">
+  <div id='app-body'>
+    <main class='page'>
       {{/unless}}
-      <div class="section-title">Hello from about</div>
+      <div class='section-title'>
+        <div id='home'>
+          <img src='/images/rick-morty.png' alt='welcome' />
+        </div>
+      </div>
       {{#unless contentOnly}}
     </main>
     <div class='page-loader'>

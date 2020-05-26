@@ -1,7 +1,7 @@
 const express = require('express');
 const asset = require('../lib/asset-hashing').asset;
 const router = express.Router(); // eslint-disable-line new-cap
-const CSSPATH = asset.encode('/css/style.css');
+const CSSPATH = asset.encode('/css/styles.min.css');
 const JSPATH = asset.encode('/js/main.js');
 
 router.use((req, res, next) => {
@@ -16,7 +16,7 @@ router.use((req, res, next) => {
       `script-src 'self' 'unsafe-eval' https://apis.google.com https://www.google-analytics.com https://www.gstatic.com`,
       `style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://www.gstatic.com`,
       `font-src 'self' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/`,
-      `img-src 'self' https://storage.googleapis.com https://www.google-analytics.com`,
+      `img-src 'self' https://storage.googleapis.com https://www.google-analytics.com https://rickandmortyapi.com`,
     ].join('; '),
   );
   /* eslint-enable quotes */

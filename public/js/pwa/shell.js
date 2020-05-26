@@ -5,7 +5,7 @@ export default class Shell {
     this.document = document;
     this.backlink = document.querySelector('#backlink');
     this.tabs = Array.from(
-      document.querySelectorAll('#installable, #newest, #score, #tabs'),
+      document.querySelectorAll('#home, #humans, #aliens, #poopybuttholes'),
     );
     this.subtitle = document.querySelector('#subtitle');
     this.search = document.querySelector('#search');
@@ -16,32 +16,20 @@ export default class Shell {
     this.states.set(route, shellState);
   }
 
-  showElement(element, visible) {
-    if (visible) {
-      element.classList.remove('hidden');
-      return;
-    }
-    element.classList.add('hidden');
-  }
-
   updateTab(tab, options) {
-    this.showElement(tab, options.showTabs);
     if (!options.currentTab) {
       return;
     }
 
     if (tab.id === options.currentTab) {
-      tab.classList.add('activetab');
+      tab.classList.add('active');
       return;
     }
-    tab.classList.remove('activetab');
+    tab.classList.remove('active');
   }
 
   onRouteChange(route) {
     const options = this.states.get(route);
-    this.showElement(this.backlink, options.backlink);
-    this.showElement(this.subtitle, options.subtitle);
-    this.showElement(this.search, options.search);
     this.tabs.forEach((tab) => this.updateTab(tab, options));
   }
 }

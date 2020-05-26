@@ -1,0 +1,9 @@
+#app-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  .page {
+    max-width: 1200px;
+  }
+}

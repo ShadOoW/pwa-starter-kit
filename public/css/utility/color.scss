@@ -1,0 +1,19 @@
+.bg {
+  background-color: var(--color-background);
+}
+
+.bg-accent {
+  background-color: var(--color-backgroundAccent);
+}
+
+.fg {
+  color: var(--color-foreground);
+}
+
+.fg-accent {
+  color: var(--color-foregroundAccent);
+}
+
+.fg-error {
+  color: var(--color-foregroundError);
+}

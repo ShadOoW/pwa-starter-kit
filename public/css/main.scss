@@ -1,7 +1,13 @@
-body {
-  a {
-    color: red;
-    display: flex;
-    user-select: none;
-  }
-}
+// Init
+@import 'reset/index';
+@import 'bootstrap/index';
+@import 'utility/index';
+
+// Partials
+@import 'partials/header';
+@import 'partials/body';
+@import 'partials/footer';
+
+// Pages
+@import 'pages/home';
+@import 'pages/characters';

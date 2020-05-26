@@ -1,0 +1,40 @@
+@use '../variables/color';
+@use '../variables/font';
+
+html {
+  font-size: font.$fontSizeInit;
+  height: 100%;
+
+  --color-background: #{color.$background};
+  --color-backgroundAccent: #{color.$backgroundAccent};
+  --color-foreground: #{color.$foreground};
+  --color-foregroundAccent: #{color.$foregroundAccent};
+  --color-foregroundError: #{color.$foregroundError};
+
+  body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-size: font.$fontSizeBase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'liga', 'tnum', 'case', 'calt', 'zero', 'ss01',
+      'locl';
+  }
+}
+
+h1 {
+  font-size: font.$fontSizeH1;
+}
+
+h2 {
+  font-size: font.$fontSizeH2;
+}
+
+h3 {
+  font-size: font.$fontSizeH3;
+}

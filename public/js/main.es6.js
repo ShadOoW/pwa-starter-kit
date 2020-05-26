@@ -24,7 +24,7 @@ class Main {
 
     this.setupRoutes();
     // this.setupBacklink();
-    this.setupServiceWorker();
+    // this.setupServiceWorker();
     // this.setupMessaging();
   }
 
@@ -47,14 +47,6 @@ class Main {
     //   const urlParams = new URLSearchParams(window.location.search);
     //   document.querySelector('#search-input').value = urlParams.get('query');
     // };
-
-    // About
-    this._addRoute(/\/about/, transitionStrategy, [], {
-      showTabs: false,
-      backlink: true,
-      subtitle: true,
-      search: true,
-    });
 
     // const setupCharts = () => {
     //   const generateChartConfig = (chartElement) => {
@@ -111,13 +103,39 @@ class Main {
     //   },
     // );
 
-    // Route for `/`.
+    // Route for human's characters page
+    this._addRoute(
+      /characters\/humans((\/\w+)+|\/?)/,
+      transitionStrategy,
+      () => {},
+      {
+        currentTab: 'humans',
+      },
+    );
+
+    // Route for alien's characters page
+    this._addRoute(
+      /characters\/aliens((\/\w+)+|\/?)/,
+      transitionStrategy,
+      () => {},
+      {
+        currentTab: 'aliens',
+      },
+    );
+
+    // Route for poopybutthole's characters page
+    this._addRoute(
+      /characters\/poopybuttholes((\/\w+)+|\/?)/,
+      transitionStrategy,
+      () => {},
+      {
+        currentTab: 'poopybuttholes',
+      },
+    );
+
+    // Route for home page.
     this._addRoute(/.+/, transitionStrategy, () => {}, {
-      showTabs: true,
-      backlink: false,
-      subtitle: true,
-      search: true,
-      currentTab: 'installable',
+      currentTab: 'home',
     });
 
     this.router.setupInitialRoute();

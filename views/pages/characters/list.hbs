@@ -1,0 +1,35 @@
+{{#unless contentOnly}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> head}}
+</head>
+
+<body>
+  {{> header}}
+  <div id="app-body">
+    <main class="page">
+      {{/unless}}
+      <div class='characters'>
+        {{#each characters}}
+        <div class='character'>
+          <div class='cover'>
+            <img src='{{ image }}' alt='welcome' />
+          </div>
+          <div class='name'>
+            <h3>{{ name }}</h3>
+          </div>
+        </div>
+        {{/each}}
+        {{#unless contentOnly}}
+      </div>
+    </main>
+    <div class='page-loader'>
+    </div>
+  </div>
+  {{> footer}}
+</body>
+
+</html>
+{{/unless}}

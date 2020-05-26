@@ -1,0 +1,28 @@
+<!-- Start of header include. -->
+<header id='app-header'>
+  <div class='logo'>
+    <div>
+      <img src='/images/rick-morty-logo.png' width="185" height="60" />
+    </div>
+  </div>
+
+  <nav class='flex'>
+    <a id='home' class='tab{{#if (equals currentTab 'home')}} active{{/if}} offline-aware' href='/'>
+      <h2>Home</h2>
+    </a>
+    <a id='humans' class='tab{{#if (equals currentTab 'humans')}} active{{/if}} offline-aware'
+      href='/characters/humans'>
+      <h2>Humans</h2>
+    </a>
+    <a id='aliens' class='tab{{#if (equals currentTab 'aliens')}} active{{/if}} offline-aware'
+      href='/characters/aliens'>
+      <h2>Aliens</h2>
+    </a>
+    <a id='poopybuttholes' class='tab{{#if (equals currentTab 'poopybuttholes')}} active{{/if}} offline-aware'
+      href='/characters/poopybuttholes'>
+      <h2>Poopybuttholes</h2>
+    </a>
+  </nav>
+</header>
+
+<!-- End of header include. -->

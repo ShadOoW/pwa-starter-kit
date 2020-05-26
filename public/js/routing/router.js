@@ -27,7 +27,6 @@ export default class Router {
     const location = this.window.document.location.href;
     const route = this.findRoute(location);
     console.log('Updating Content from JS');
-    console.log(route);
     if (!route) {
       console.error('Url did not match any router: ', location);
       // TODO: navigate to 404?
