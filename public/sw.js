@@ -128,9 +128,12 @@ toolbox.router.get('/', (request, values) => {
   return toolbox.router.default(request, values, CHARACTERS_LIST_OPTION);
 });
 
-toolbox.router.get(/.*\.(js|png|svg|jpg|css)$/, (request, values, options) => {
-  return toolbox.cacheFirst(request, values, options);
-});
+toolbox.router.get(
+  /.*\.(js|png|svg|jpg|jpeg|css)$/,
+  (request, values, options) => {
+    return toolbox.cacheFirst(request, values, options);
+  },
+);
 
 // API request bypass the Shell
 toolbox.router.get(/\/api\/.*/, (request, values, options) => {
