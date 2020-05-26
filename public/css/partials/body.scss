@@ -4,6 +4,13 @@
   justify-content: center;
 
   .page {
+    width: 100%;
     max-width: 1200px;
   }
+}
+
+main.transition,
+body[offline] .offline-aware:not([cached]) {
+  opacity: 0.3;
+  pointer-events: none;
 }
