@@ -16,6 +16,10 @@ body[offline] .offline-aware:not([cached]) {
   pointer-events: none;
 }
 
+main.transition > * {
+  opacity: 0;
+}
+
 .page-loader {
   position: absolute;
   width: 100%;
