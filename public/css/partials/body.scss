@@ -2,6 +2,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  position: relative;
 
   .page {
     width: 100%;
@@ -13,4 +14,55 @@ main.transition,
 body[offline] .offline-aware:not([cached]) {
   opacity: 0.3;
   pointer-events: none;
+}
+
+.page-loader {
+  position: absolute;
+  width: 100%;
+  top: 120px;
+  transition: opacity 0.3s ease-in-out;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+}
+
+.loader-dot {
+  position: relative;
+  display: inline-block;
+
+  height: 10px;
+  width: 10px;
+  margin: 2px;
+  border-radius: 100%;
+  background-color: var(--color-foregroundAccent);
+  opacity: 0.6;
+
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  animation: loader-dots 2s infinite;
+}
+
+.loader .loader-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loader .loader-dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loader .loader-dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes loader-dots {
+  0%,
+  100% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(0.8);
+    opacity: 0.9;
+  }
 }
