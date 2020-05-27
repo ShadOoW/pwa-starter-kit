@@ -3,6 +3,8 @@
 .characters {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  padding: 0.5rem;
 
   .character {
     display: flex;
