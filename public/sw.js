@@ -6,7 +6,7 @@ toolbox.options.debug = false;
 
 importScripts('/js/sw-assets-precache.js'); /* global ASSETS */
 
-const VERSION = '1';
+const VERSION = '2';
 const PREFIX = 'pwa-starter-kit';
 const CACHE_NAME = `${PREFIX}-v${VERSION}`;
 const CHARACTER_OPTION = {
