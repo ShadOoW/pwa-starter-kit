@@ -159,8 +159,23 @@ class Main {
    */
   setupServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then((r) => {
-        console.log('REGISTRATION', r);
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          installingWorker.onstatechange = () => {
+            switch (installingWorker.state) {
+              case 'installed':
+                if (navigator.serviceWorker.controller) {
+                  // new update available
+                  setTimeout(() => document.location.reload(true), 1000);
+                  caches.keys().then((keys) => {
+                    keys.forEach((key) => caches.delete(key));
+                  });
+                }
+                break;
+            }
+          };
+        };
       });
     } else {
       console.log(
