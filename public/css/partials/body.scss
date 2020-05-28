@@ -2,17 +2,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   position: relative;
   padding-top: 110px;
 
   .page {
     width: 100%;
     max-width: 1200px;
+    justify-content: center;
+    display: flex;
   }
 }
 
-main.transition,
 body[offline] .offline-aware:not([cached]) {
   opacity: 0.3;
   pointer-events: none;

@@ -2,7 +2,7 @@ importScripts(
   'https://cdnjs.cloudflare.com/ajax/libs/sw-toolbox/3.6.1/sw-toolbox.js',
 );
 /* global toolbox */
-toolbox.options.debug = true;
+toolbox.options.debug = false;
 
 importScripts('/js/sw-assets-precache.js'); /* global ASSETS */
 
@@ -99,20 +99,14 @@ toolbox.router.default = (request, values, options) => {
   return mainHandler(request, values, options);
 };
 
-// toolbox.router.get(/\/characters\/\d+/, toolbox.router.default, PWA_OPTION);
+toolbox.router.get(
+  /\/characters\/(human|alien|poopybutthole)\/[0-9]*/,
+  toolbox.router.default,
+  CHARACTER_OPTION,
+);
 
 toolbox.router.get(
-  '/characters/humans',
-  toolbox.router.default,
-  CHARACTERS_LIST_OPTION,
-);
-toolbox.router.get(
-  '/characters/aliens',
-  toolbox.router.default,
-  CHARACTERS_LIST_OPTION,
-);
-toolbox.router.get(
-  '/characters/poopybuttholes',
+  /\/characters\/(human|alien|poopybutthole)/,
   toolbox.router.default,
   CHARACTERS_LIST_OPTION,
 );

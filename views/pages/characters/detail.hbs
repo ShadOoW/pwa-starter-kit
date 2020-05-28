@@ -1,0 +1,49 @@
+{{#unless contentOnly}}
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  {{> head}}
+</head>
+
+<body>
+  {{> header}}
+  <div id='app-body'>
+    <main class='page'>
+      {{/unless}}
+      <div class='characters-detail'>
+        <div class='cover'>
+          <img src='{{ data.image }}' alt='welcome' />
+        </div>
+        <div class='info'>
+          <div class='flex align-center flex-column'>
+            <h2>{{ data.name }}</h2>
+            <div class='flex align-center'>
+              <span class='{{#if (equals data.status 'Alive')}}alive{{else}}dead{{/if}}'></span>
+              <span>{{data.status}}</span>
+            </div>
+          </div>
+
+          <div>
+            <span>Gender: </span>
+            <h3>{{data.gender}}</h3>
+          </div>
+          <div>
+            <span>Origin: </span>
+            <h3>{{data.origin.name}}</h3>
+          </div>
+          <div>
+            <span>Location: </span>
+            <h3>{{data.location.name}}</h3>
+          </div>
+        </div>
+      </div>
+      {{#unless contentOnly}}
+    </main>
+    <div class='page-loader' />
+  </div>
+  {{> footer}}
+</body>
+
+</html>
+{{/unless}}

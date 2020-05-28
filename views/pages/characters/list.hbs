@@ -1,6 +1,6 @@
 {{#unless contentOnly}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
   {{> head}}
@@ -8,18 +8,20 @@
 
 <body>
   {{> header}}
-  <div id="app-body">
-    <main class="page">
+  <div id='app-body'>
+    <main class='page'>
       {{/unless}}
-      <div class='characters'>
-        {{#each characters}}
-        <div class='character offline-aware'>
-          <div class='cover'>
-            <img src='{{ image }}' alt='welcome' />
-          </div>
-          <div class='name'>
-            <h3>{{ name }}</h3>
-          </div>
+      <div class='characters-list'>
+        {{#each data}}
+        <div class='character'>
+          <a class='offline-aware' href='/characters/{{../currentTab}}/{{ id }}'>
+            <div class='cover'>
+              <img src='{{ image }}' alt='welcome' />
+            </div>
+            <div class='name'>
+              <h3>{{ name }}</h3>
+            </div>
+          </a>
         </div>
         {{/each}}
         {{#unless contentOnly}}

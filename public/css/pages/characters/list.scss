@@ -1,6 +1,6 @@
-@use '../mixins/breakpoints';
+@use '../../mixins/breakpoints';
 
-.characters {
+.characters-list {
   display: flex;
   flex-wrap: wrap;
   width: 100%;

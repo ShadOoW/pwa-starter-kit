@@ -103,33 +103,46 @@ class Main {
     //   },
     // );
 
-    // Route for human's characters page
+    // Route for `/characters/[id]`. Allow most characters (but will only ever be encodedURIComponent).
     this._addRoute(
-      /characters\/humans((\/\w+)+|\/?)/,
+      /\/characters\/(human|alien|poopybutthole)\/[0-9]*/,
       transitionStrategy,
       () => {},
       {
-        currentTab: 'humans',
+        showTabs: false,
+        backlink: true,
+        subtitle: true,
+        search: true,
+      },
+    );
+
+    // Route for human's characters page
+    this._addRoute(
+      /characters\/human((\/\w+)+|\/?)/,
+      transitionStrategy,
+      () => {},
+      {
+        currentTab: 'human',
       },
     );
 
     // Route for alien's characters page
     this._addRoute(
-      /characters\/aliens((\/\w+)+|\/?)/,
+      /characters\/alien((\/\w+)+|\/?)/,
       transitionStrategy,
       () => {},
       {
-        currentTab: 'aliens',
+        currentTab: 'alien',
       },
     );
 
     // Route for poopybutthole's characters page
     this._addRoute(
-      /characters\/poopybuttholes((\/\w+)+|\/?)/,
+      /characters\/poopybutthole((\/\w+)+|\/?)/,
       transitionStrategy,
       () => {},
       {
-        currentTab: 'poopybuttholes',
+        currentTab: 'poopybutthole',
       },
     );
 

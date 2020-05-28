@@ -38,3 +38,14 @@ h2 {
 h3 {
   font-size: font.$fontSizeH3;
 }
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  color: var(--color-foregroundAccent);
+  text-decoration: none;
+  cursor: pointer;
+}

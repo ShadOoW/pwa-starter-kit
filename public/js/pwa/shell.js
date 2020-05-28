@@ -5,7 +5,7 @@ export default class Shell {
     this.document = document;
     this.backlink = document.querySelector('#backlink');
     this.tabs = Array.from(
-      document.querySelectorAll('#home, #humans, #aliens, #poopybuttholes'),
+      document.querySelectorAll('#home, #human, #alien, #poopybutthole'),
     );
     this.subtitle = document.querySelector('#subtitle');
     this.search = document.querySelector('#search');

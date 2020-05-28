@@ -14,18 +14,18 @@ function getViewState(req) {
   return viewState;
 }
 
-function getViewArguments(req, viewState, characters, tab) {
+function getViewArguments(req, viewState, data, species) {
   return Object.assign(libMetadata.fromRequest(req), {
     title: TITLE,
     description: DESCRIPTION,
-    characters,
-    currentTab: req.path.substring(1, req.path.length) || tab,
+    data,
+    currentTab: species,
     contentOnly: viewState.contentOnly,
   });
 }
 
 // List and render template view
-async function list(req, res, next, species, tab) {
+async function list(req, res, next, species) {
   const viewState = getViewState(req);
   try {
     const response = await axios.get(
@@ -35,7 +35,27 @@ async function list(req, res, next, species, tab) {
     const html = await render(
       res,
       'pages/characters/list.hbs',
-      getViewArguments(req, viewState, response.data.results, tab),
+      getViewArguments(req, viewState, response.data.results, species),
+    );
+    res.send(html);
+  } catch (error) {
+    error.status = 500;
+    next(error);
+  }
+}
+
+// Get details and render template view
+async function detail(req, res, next, species, id) {
+  const viewState = getViewState(req);
+  try {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/character/${id}`,
+    );
+
+    const html = await render(
+      res,
+      'pages/characters/detail.hbs',
+      getViewArguments(req, viewState, response.data, species),
     );
     res.send(html);
   } catch (error) {
@@ -45,16 +65,12 @@ async function list(req, res, next, species, tab) {
 }
 
 // Controllers
-router.get('/humans', (req, res, next) => {
-  list(req, res, next, 'human', 'humans');
+router.get('/:species(human|alien|poopybutthole)/', (req, res, next) => {
+  list(req, res, next, req.params.species);
 });
 
-router.get('/aliens', (req, res, next) => {
-  list(req, res, next, 'alien', 'aliens');
-});
-
-router.get('/poopybuttholes', (req, res, next) => {
-  list(req, res, next, 'poopybutthole', 'poopybuttholes');
+router.get('/:species(human|alien|poopybutthole)/:id', (req, res, next) => {
+  detail(req, res, next, req.params.species, req.params.id);
 });
 
 // Render as a promise

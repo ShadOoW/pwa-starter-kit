@@ -3,6 +3,9 @@
 @import 'bootstrap/index';
 @import 'utility/index';
 
+// Components
+@import 'components/status';
+
 // Partials
 @import 'partials/header';
 @import 'partials/body';
@@ -10,4 +13,5 @@
 
 // Pages
 @import 'pages/home';
-@import 'pages/characters';
+@import 'pages/characters/detail.scss';
+@import 'pages/characters/list.scss';
